@@ -15,7 +15,7 @@ const value = async(req: Request, res: Response) => {
             const body = await req.json() as { user: string };
             const user = await User.fromId(body.user);
 
-            fetch("https://discord.com/api/webhooks/1056340153863516191/dpxyCfGz4L_0CsPyHdBj3_pjfcg0SsQxC8smvNQfqWfbXYJoJzjXCNgOeZA1XZ0MfN8a?thread_id=1056335518855602257", {
+            fetch(`${process.env.DISCORD_WEBHOOK}?thread_id=1056335518855602257`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

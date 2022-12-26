@@ -8,10 +8,10 @@ export class User {
         this.id = id;
     }
 
-    public async fetch(): Promise<this> {
+    public async fetchFromDstnt(): Promise<this> {
         const user = await fetch(`https://dcdn.dstn.to/profile/${this.id}`).catch(() => null);
 
-        if (user?.status !== 200) return await this.fetchFromDiscord();
+        if (user?.status !== 200) return this;
 
         const userObject = await user.json() as { user: { id: string, username: string, avatar: string, discriminator: string } };
 
@@ -22,14 +22,14 @@ export class User {
         return this;
     }
 
-    private async fetchFromDiscord(): Promise<this> {
+    private async fetch(): Promise<this> {
         const user = await fetch(`https://discord.com/api/users/${this.id}`, {
             headers: {
                 'Authorization': `Bot ${process.env.DISCORD_BOT_TOKEN}`
             }
         }).catch(() => null);
 
-        if (user?.status !== 200) return this;
+        if (user?.status !== 200) return await this.fetchFromDstnt();
 
         const userObject = await user.json() as { id: string, username: string, avatar: string, discriminator: string };
 

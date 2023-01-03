@@ -27,6 +27,22 @@ const value = async(req: Request, res: Response) => {
                 })
             })
         }
+        case "mumblum": {
+            const body = await req.json() as { user: string };
+            const user = await User.fromId(body.user);
+
+            fetch(`${process.env.DISCORD_WEBHOOK_MUMBLUM}?thread_id=1056315804070719581`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    content: `User <@${body.user}> voted for the bot on top.gg!`,
+                    username: `${user.name ?? "??"}#${user.discriminator ?? "0000"}`,
+                    avatar_url: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`
+                })
+            })
+        }
     }
     res.send("Hello World!");
 }

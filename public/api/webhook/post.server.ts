@@ -68,7 +68,7 @@ const value = async (req: Request, res: Response) => {
             const user = await User.fromId(body.user);
 
             fetch(
-                `${process.env.DISCORD_WEBHOOK_MUMBLUM}?thread_id=1060247001914155019`,
+                `${process.env.DISCORD_WEBHOOK_HYROSCOFFEE}?thread_id=1060247001914155019`,
                 {
                     method: "POST",
                     headers: {

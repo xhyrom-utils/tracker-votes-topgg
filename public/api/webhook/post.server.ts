@@ -22,7 +22,7 @@ const value = async (req: Request, res: Response) => {
             const body = (await req.json()) as { user: string };
             const user = await User.fromId(body.user);
 
-            setex(`roles-bot:vote:${body.user}`, 600, "true");
+            setex(`roles-bot:vote:${body.user}`, 43000, "true");
             fetch(
                 `${process.env.DISCORD_WEBHOOK}?thread_id=1056335518855602257`,
                 {
@@ -44,7 +44,7 @@ const value = async (req: Request, res: Response) => {
             const body = (await req.json()) as { user: string };
             const user = await User.fromId(body.user);
 
-            setex(`mumblum:vote:${body.user}`, 600, "true");
+            setex(`mumblum:vote:${body.user}`, 43000, "true");
             fetch(
                 `${process.env.DISCORD_WEBHOOK_MUMBLUM}?thread_id=1056315804070719581`,
                 {

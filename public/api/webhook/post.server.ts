@@ -39,6 +39,7 @@ const value = async (req: Request, res: Response) => {
                     }),
                 }
             );
+            break;
         }
         case "mumblum": {
             const body = (await req.json()) as { user: string };
